@@ -118,9 +118,9 @@ const requestData = computed(() =>
 )
 
 const stompClient = new Client({
-    brokerURL: "",
+    brokerURL: "ws://localhost:9999/gs-guide-websocket",
     connectHeaders: {
-        // Authorization: "Bearer",
+        Authorization: "Bearer <token>",
     },
     onConnect: () => {
         data.connectionStatus = true
