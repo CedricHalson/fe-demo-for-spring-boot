@@ -126,7 +126,7 @@ const stompClient = new Client({
         data.connectionStatus = true
 
         data.subscription = stompClient.subscribe("/topic/greetings", (msg) => {
-            data.messageList.push(JSON.stringify(msg.body, undefined, 4))
+            data.messageList.push(JSON.stringify(JSON.parse(msg.body), undefined, 4))
         })
     },
     onDisconnect: () => {
