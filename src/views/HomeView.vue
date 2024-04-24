@@ -88,7 +88,7 @@ const data = reactive({
 
     subscription: {} as StompSubscription,
 
-    messageList: [] as Array<string>,
+    messageList: [] as Array<Record<string, any>>,
 })
 
 const statusText = computed(() => {
@@ -126,7 +126,7 @@ const stompClient = new Client({
         data.connectionStatus = true
 
         data.subscription = stompClient.subscribe("/topic/greetings", (msg) => {
-            data.messageList.push(JSON.stringify(JSON.parse(msg.body), undefined, 4))
+            data.messageList.push(JSON.parse(msg.body))
         })
     },
     onDisconnect: () => {
@@ -153,7 +153,7 @@ function onDisconnect() {
 
 function onSubmit() {
     stompClient.publish({
-        destination: "/update-location",
+        destination: "/app/update-location",
         body: requestData.value,
         headers: {},
     })
@@ -213,4 +213,5 @@ function onSubmit() {
         background: lightslategray
         padding: 12px
         color: linen
+        white-space: break-spaces
 </style>
